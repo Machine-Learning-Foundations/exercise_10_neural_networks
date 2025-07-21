@@ -15,7 +15,7 @@ Torch takes care of our autograd needs. The documentation is available at https:
 
 To get a notion of how function learning of a dense layer network works on given data, we will first have a look at the example from the lecture. In the following task you will implement gradient descent learning of a dense neural network using `torch` and use it to learn a function, e.g. a cosine.
 
-- As a first step, create a cosine function in torch and add some noise with `torch.randn`. Use, for example, a signal length of $n = 200$ samples and a period of your choosing. This will be the noisy signal that the model is supposed to learn the underlaying cosine from.
+- Open `src/denoise_cosine.py` and go to the `__main__` function. Look at the code that is already there. You can see that a cosine function with a signal length of $n = 200$ samples has already been created in torch. In the for loop, which will be our train loop, some noise is added to the cosine function with `torch.randn`. This will be the noisy signal that the model is supposed to learn the underlying cosine from.
 
 - Recall the definition of the sigmoid function $\sigma$
 
@@ -33,7 +33,7 @@ To get a notion of how function learning of a dense layer network works on given
 ```
    where $\mathbf{W}_1\in \mathbb{R}^{m,n}, \mathbf{x}\in\mathbb{R}^n, \mathbf{b}\in\mathbb{R}^m$ and $m$ denotes the number of neurons and $n$ the input signal length. Suppose that the input parameters are stored in a [python dictonary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) with the keys `W_1`, `W_2` and `b`.   Use numpys `@` notation for the matrix product.
 
-- Use `torch.randn` to initialize your weights. For a signal length of $200$ the $W_2$ matrix should have e.g. have the shape [200, `hidden_neurons`] and $W_1$ a shape of [`hidden_neurons`, 200].
+- Use `torch.normal` to initialize your weights. This function will sample the values from a normal distribution. To ensure that the weights are not initialized too high, choose a mean of 0 and a standard deviation of 0.5. For a signal length of $200$ the $W_2$ matrix should have e.g. have the shape [200, `hidden_neurons`] and $W_1$ a shape of [`hidden_neurons`, 200].
 
 - Implement and test a squared error cost
 
@@ -52,7 +52,7 @@ C_{\text{se}} = \frac{1}{2} \sum_{k=1}^{n} (\mathbf{y}_k - \mathbf{o}_k)^2
 ```
 
 
-- In the equation above $\mathbf{W} \in \mathbb{R}$ holds for weight matrices and biases $\epsilon$ denotes the step size and $\delta$ the gradient operation with respect to the following weight.  Use a loop to repeat weight updates for multiple operations. Try to train for one hundred updates.
+- In the equation above $\mathbf{W} \in \mathbb{R}$ holds for weight matrices and biases $\epsilon$ denotes the step size and $\delta$ the gradient operation with respect to the following weight.  Use the loop to repeat weight updates for multiple operations. Try to train for one hundred updates.
 
 - At last, compute the network output `y_hat` on the final values to see if the network learned the underlying cosine function. Use `matplotlib.pyplot.plot` to plot the noisy signal and the network output $\mathbf{o}$.
 
@@ -89,7 +89,7 @@ C_{\text{ce}}(\mathbf{y},\mathbf{o})=-\frac{1}{n_b}\sum_{i=1}^{n_b}\sum_{k=1}^{n
 
 - Initialize the network with the `Net` object (see the `torch` documentation for help).
 
-- Train your network for a fixed number of `EPCOHS` over the entire dataset. Major steps in trianing loop include normalize inputs, model prediction, loss calculation, `.backward()` over loss to compute gradients, `sgd_step` and `zero_grad`. Validate model once per epoch.
+- Train your network for a fixed number of `EPOCHS` over the entire dataset. Major steps in training loop include normalizing inputs, model prediction, loss calculation, `.backward()` over loss to compute gradients, `sgd_step` and `zero_grad`. Validate model once per epoch.
     
 - When model is trained, load the test data with `test_loader` and calculate the test accuracy.
 
