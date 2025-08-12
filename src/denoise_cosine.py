@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import torch as th
 from torch.func import grad_and_value
 from tqdm import tqdm
+import os
 
 
 def sigmoid(x: th.Tensor) -> th.Tensor:
@@ -69,7 +70,7 @@ if __name__ == "__main__":
     pass
     # TODO: Choose a suitable stepsize
     step_size = 0.0
-    iterations = 150
+    iterations = 100
     input_neurons = output_neurons = 200
     # TODO: Choose a proper network size.
     hidden_neurons = 0
@@ -102,6 +103,7 @@ if __name__ == "__main__":
     plt.plot(x, y_noise, label="input")
     plt.legend()
     plt.grid()
+    os.makedirs("./figures", exist_ok=True)
     plt.savefig("./figures/Denoise.png", dpi=600, bbox_inches="tight")
     plt.show()
     print("Done")
