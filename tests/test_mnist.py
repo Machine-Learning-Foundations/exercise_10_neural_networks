@@ -2,6 +2,7 @@
 
 import sys
 
+import numpy as np
 import pytest
 import torch as th
 
@@ -9,26 +10,17 @@ sys.path.insert(0, "./src/")
 
 from src.mnist import cross_entropy, normalize_batch
 
-testdata = [
-    (
-        th.tensor([[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]]),
-        th.tensor([[0.2, 0.12], [0.42, 0.21], [0.22, 0.34]]),
-        th.tensor(1.5022, dtype=th.float32),
-    ),
-    (
-        th.tensor([[1.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 1.0]]),
-        th.tensor([[0.8, 0.11], [0.22, 0.22], [0.1, 0.3], [0.08, 0.19]]),
-        th.tensor(0.7607, dtype=th.float32),
-    ),
-]
-
-
-@pytest.mark.parametrize("label, out, res", testdata)
-def test_cross_entropy(label, out, res) -> None:
+def test_cross_entropy() -> None:
     """Test if the cross entropy is implemented correctly."""
-    result = cross_entropy(label=label, out=out)
-    ce = th.round(result, decimals=4)
-    assert th.allclose(ce, res)
+    label = th.from_numpy(np.random.randint(0, 1, (64, 10)).astype(np.float64))
+    out = th.from_numpy(np.random.randn(64, 10))
+    out = out.softmax(dim=-1)
+    my_result = cross_entropy(label=label, out=out)
+    th_result = th.nn.functional.binary_cross_entropy(
+        input=out, target=label, reduction="mean"
+    )
+    assert th.allclose(my_result, th_result)
+
 
 
 norm_testdata = [
