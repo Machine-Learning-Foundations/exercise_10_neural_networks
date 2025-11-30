@@ -18,8 +18,8 @@ def sigmoid(x: th.Tensor) -> th.Tensor:
     Returns:
         th.Tensor: Sigmoid activated input.
     """
-    # TODO: Replace 0. with the correct expression.
-    return 0.
+    # TODO: 1. Implement sigmoid activation function.
+    return 0.0
 
 
 def net(params: Dict, x: th.Tensor) -> th.Tensor:
@@ -32,7 +32,7 @@ def net(params: Dict, x: th.Tensor) -> th.Tensor:
     Returns:
         th.Tensor: Network prediction.
     """
-    # TODO: Implement single layer pass.
+    # TODO: 2. Implement a single layer pass.
     return None
 
 
@@ -46,8 +46,8 @@ def cost(y: th.Tensor, h: th.Tensor) -> th.Tensor:
     Returns:
         th.Tensor: Squared Error.
     """
-    # TODO: Implement Squared Error loss.
-    return 0.
+    # TODO: 4. Implement Squared Error loss.
+    return 0.0
 
 
 def net_cost(params: Dict, x: th.Tensor, y: th.Tensor) -> th.Tensor:
@@ -56,19 +56,20 @@ def net_cost(params: Dict, x: th.Tensor, y: th.Tensor) -> th.Tensor:
     Args:
         params (Dict): Dictionary containing W1, b, and W2.
         x (th.Tensor): Network input.
-        y (th.Tensor): desired output.
+        y (th.Tensor): Desired output.
 
     Returns:
         th.Tensor: Squared Error.
     """
-    # TODO: Call network, compute and return the loss.
+    # TODO: 5. Call network, compute and return the loss.
     return None
 
 
 if __name__ == "__main__":
     # TODO: Use th.manual_seed as 42 to set the seed for the network initialization
     pass
-    # TODO: Choose a suitable stepsize
+    # TODO: Choose a suitable step size (the step size is typically a small positive value,
+    # you can try values between 1e-1 to 1e-5)
     step_size = 0.0
     iterations = 100
     input_neurons = output_neurons = 200
@@ -78,23 +79,27 @@ if __name__ == "__main__":
     x = th.linspace(-3 * th.pi, 3 * th.pi, 200)
     y = th.cos(x)
 
-    # TODO: Initialize the parameters
+    # TODO: 3. Initialize the parameters
     W1 = None
     b = None
     W2 = None
 
-    # TODO: Instantiate grad_and_value function
+    # TODO: Instantiate grad_and_value function. The grad_and_value function takes a function as input and returns another function
+    # that computes both the gradients and the value of the input function. Thus we can use it to compute the gradients of the cost function with respect to the network parameters.
     value_grad = None
 
+    # Training loop
     for i in (pbar := tqdm(range(iterations))):
+        # Set a new seed each loop to generate different noise
         th.manual_seed(i)
         y_noise = y + th.randn([200])
 
+        # 6.
         # TODO: Compute loss and gradients
 
         # TODO: Update parameters using SGD
 
-    # TODO: Compute test y_hat using y_noise and converged parameters
+    # TODO: 7. Compute test y_hat using y_noise and converged parameters
     y_hat = None
 
     plt.title("Denoising a cosine")

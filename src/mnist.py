@@ -16,7 +16,7 @@ class Net(th.nn.Module):
     def __init__(self) -> None:
         """Network initialization."""
         super().__init__()
-        # TODO: Initialize the network.
+        # TODO: 2. Initialize the network.
 
     def forward(self, x: th.Tensor) -> th.Tensor:
         """Network forward pass.
@@ -27,7 +27,7 @@ class Net(th.nn.Module):
         Returns:
             th.Tensor: Network predictions of shape (BS, 10).
         """
-        # TODO: Implement forward pass.
+        # TODO: 3. Implement forward pass.
         return None
 
 
@@ -41,21 +41,21 @@ def cross_entropy(label: th.Tensor, out: th.Tensor) -> th.Tensor:
     Returns:
         th.Tensor: Cross-Entropy loss.
     """
-    # TODO: Implement Cross-Entropy loss.
-    return 0.
+    # TODO: 4. Implement Cross-Entropy loss.
+    return 0.0
 
 
 def sgd_step(model: Net, learning_rate: float) -> Net:
     """Perform SGD.
 
     Args:
-        model (Net): Network objekt.
+        model (Net): Network object.
         learning_rate (float): Learning rate or step size.
 
     Returns:
         Net: SGD applied model.
     """
-    # TODO: Implement SGD using model.parameters
+    # TODO: 5. Implement SGD using model.parameters
     # Hint: For gradient one can use model.param.grad
     return model
 
@@ -64,14 +64,14 @@ def get_acc(model: Net, dataloader: th.utils.data.DataLoader) -> float:
     """Compute accuracy given specific dataloader.
 
     Args:
-        model (Net): Network objekt.
-        dataloader (th.utils.data.DataLoader): Dataloader objekt.
+        model (Net): Network object.
+        dataloader (th.utils.data.DataLoader): Dataloader object.
 
     Returns:
         float: Accuracy.
     """
-    # TODO: Given model and dataloader compute accuracy.
-    return 0.
+    # TODO: 6. Given model and dataloader compute accuracy.
+    return 0.0
 
 
 def zero_grad(model: Net) -> Net:
@@ -97,7 +97,7 @@ def normalize_batch(imgs: th.Tensor) -> th.Tensor:
     Returns:
         th.Tensor: Normalized images.
     """
-    # TODO: Given images tensor, normalize the images.
+    # TODO: 1. Given images tensor, normalize the images.
     return None
 
 
@@ -135,5 +135,13 @@ if __name__ == "__main__":
         batch_size=10000,
         shuffle=False,
     )
-    
-    # TODO: Setup a dense layer network, train and test the network. 
+
+    # TODO: Setup a dense layer network, train and test the network.
+
+    # TODO: 7. Initialize the network.
+
+    # TODO: 8. Train the network. Hint: Define two nested loops, one for epochs and one for batches.
+
+    # TODO: 9. Test the network using test_loader.
+
+    # Optional: 10. Plot the training and validation accuracy curves and add the test accuracy in the end.
